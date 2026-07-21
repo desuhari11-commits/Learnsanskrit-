@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LearnSanskrit.in - सरल संस्कृत सीखें</title>
+    <style>
+        /* CSS Styling */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fff8f0;
+            color: #333;
+        }
+        header {
+            background-color: #d35400;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        nav {
+            background-color: #e67e22;
+            display: flex;
+            justify-content: center;
+            padding: 10px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            font-weight: bold;
+        }
+        nav a:hover {
+            background-color: #d35400;
+            border-radius: 5px;
+        }
+        .container {
+            max-width: 1100px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+        .hero {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(rgba(230, 126, 34, 0.1), rgba(211, 84, 0, 0.1));
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+        .section-title {
+            color: #d35400;
+            border-bottom: 2px solid #e67e22;
+            padding-bottom: 5px;
+            margin-top: 40px;
+        }
+        /* Tools Layout */
+        .tool-box {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+            border-top: 4px solid #d35400;
+        }
+        input[type="text"] {
+            width: 70%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button {
+            padding: 12px 20px;
+            background-color: #e67e22;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        button:hover {
+            background-color: #d35400;
+        }
+        .result {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-left: 4px solid #2ecc71;
+            display: none;
+            font-weight: 500;
+        }
+        /* Quiz Styles */
+        .quiz-option {
+            display: block;
+            margin: 10px 0;
+            padding: 10px;
+            background: #f1f2f6;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .quiz-option:hover {
+            background: #e4e7eb;
+        }
+        /* Table Styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            background: white;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #e67e22;
+            color: white;
+        }
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>LearnSanskrit.in</h1>
+        <p>भाषासु मुख्या मधुरा दिव्या गीर्वाणभारती। आइए, देवभाषा संस्कृत को सरलता से सीखें।</p>
+    </header>
+
+    <nav>
+        <a href="#home">मुख्य पृष्ठ</a>
+        <a href="#dictionary">शब्दकोश</a>
+        <a href="#quiz">व्याकरण क्विज़</a>
+        <a href="#translation">अनुवाद टूल</a>
+    </nav>
+
+    <div class="container">
+        
+        <!-- Hero Section -->
+        <div class="hero" id="home">
+            <h2>संस्कृत सीखने का आधुनिक डिजिटल मंच</h2>
+            <p>अब नीचे दिए गए टूल्स की मदद से संस्कृत शब्दों के अर्थ खोजें और अपने ज्ञान की परीक्षा लें।</p>
+        </div>
+
+        <!-- 1. Dictionary Section -->
+        <h2 class="section-title" id="dictionary">🔍 संस्कृत-हिंदी शब्दकोश (Dictionary)</h2>
+        <div class="tool-box">
+            <p>किसी संस्कृत शब्द का हिंदी अर्थ जानने के लिए खोजें (उदा. मित्रम्, पुस्तकम्, भानु):</p>
+            <input type="text" id="dictInput" placeholder="संस्कृत शब्द टाइप करें...">
+            <button onclick="searchDictionary()">खोजें</button>
+            <div id="dictResult" class="result"></div>
+        </div>
+
+        <!-- 2. Quiz Section -->
+        <h2 class="section-title" id="quiz">📝 संस्कृत व्याकरण क्विज़ (Mini Quiz)</h2>
+        <div class="tool-box">
+            <p><strong>प्रश्न:</strong> 'गच्छति' शब्द में कौन सा लकार (Tense) है?</p>
+            <div class="quiz-option" onclick="checkQuiz(false)">A) लृट् लकार (Future Tense)</div>
+            <div class="quiz-option" onclick="checkQuiz(true)">B) लट् लकार (Present Tense)</div>
+            <div class="quiz-option" onclick="checkQuiz(false)">C) लङ् लकार (Past Tense)</div>
+            <div id="quizResult" class="result"></div>
+        </div>
+
+        <!-- 3. Translation Section -->
+        <h2 class="section-title" id="translation">🗣️ व्यावहारिक अनुवाद (Daily Translations)</h2>
+        <div class="tool-box">
+            <p>रोजमर्रा की बातचीत में काम आने वाले कुछ महत्वपूर्ण वाक्यों के अनुवाद यहाँ देखें:</p>
+            <table>
+                <tr>
+                    <th>हिंदी वाक्य</th>
+                    <th>संस्कृत अनुवाद</th>
+                </tr>
+                <tr>
+                    <td>आपका नाम क्या है?</td>
+                    <td>भवतः नाम किम्? (पुरुष) / भवत्याः नाम किम्? (स्त्री)</td>
+                </tr>
+                <tr>
+                    <td>मेरा नाम संजय है।</td>
+                    <td>मम नाम संजयः।</td>
+                </tr>
+                <tr>
+                    <td>आप कहाँ जा रहे हैं?</td>
+                    <td>भवान् कुत्र गच्छति?</td>
+                </tr>
+                <tr>
+                    <td>धन्यवाद।</td>
+                    <td>धन्यवादः / अनुगृहीतोऽस्मि।</td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2026 LearnSanskrit.in - सभी अधिकार सुरक्षित।</p>
+    </footer>
+
+    <!-- JavaScript For Interactivity -->
+    <script>
+        // डिक्शनरी का डेटाबेस (इसे आप और बढ़ा सकते हैं)
+        const dictionary = {
+            "मित्रम्": "दोस्त / सखा (Friend)",
+            "पुस्तकम्": "किताब (Book)",
+            "भानु": "सूर्य (Sun)",
+            "विद्यालयः": "स्कूल / पाठशाला (School)",
+            "जलम्": "पानी (Water)",
+            "गृहम्": "घर (Home)"
+        };
+
+        function searchDictionary() {
+            const input = document.getElementById("dictInput").value.trim();
+            const resultBox = document.getElementById("dictResult");
+            
+            if (input === "") {
+                resultBox.style.display = "block";
+                resultBox.style.backgroundColor = "#ffdddd";
+                resultBox.style.borderLeftColor = "#ff4d4d";
+                resultBox.innerHTML = "कृपया कोई शब्द टाइप करें।";
+                return;
+            }
+
+            if (dictionary[input]) {
+                resultBox.style.display = "block";
+                resultBox.style.backgroundColor = "#e8f8f5";
+                resultBox.style.borderLeftColor = "#2ecc71";
+                resultBox.innerHTML = <strong>${input}</strong> का अर्थ है: ${dictionary[input]};
+            } else {
+                resultBox.style.display = "block";
+                resultBox.style.backgroundColor = "#fff3cd";
+                resultBox.style.borderLeftColor = "#ffc107";
+                resultBox.innerHTML = क्षमा करें, <strong>"${input}"</strong> शब्द अभी हमारे डेटाबेस में नहीं है। आप 'मित्रम्' या 'पुस्तकम्' खोज कर देख सकते हैं।;
+            }
+        }
+
+        function checkQuiz(isCorrect) {
+            const quizBox = document.getElementById("quizResult");
+            quizBox.style.display = "block";
+            
+            if (isCorrect) {
+                quizBox.style.backgroundColor = "#e8f8f5";
+                quizBox.style.borderLeftColor = "#2ecc71";
+                quizBox.innerHTML = "🎉 बिल्कुल सही! 'गच्छति' (वह जाता है) में लट् लकार (वर्तमान काल) है।";
+            } else {
+                quizBox.style.backgroundColor = "#ffdddd";
+                quizBox.style.borderLeftColor = "#ff4d4d";
+                quizBox.innerHTML = "❌ गलत उत्तर। फिर से प्रयास करें! संकेत: यह वर्तमान काल का रूप है।";
+            }
+        }
+    </script>
+
+</body>
+</html>
